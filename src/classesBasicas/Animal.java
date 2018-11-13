@@ -24,8 +24,8 @@ public class Animal {
 			throw e;
 		}
 		
-		// Checa se é uma especie valida
-		if (especie.equals("Cachorro") || (especie.equals("Gato") || (especie.equals("Ave")) {
+		// Checa se ï¿½ uma especie valida
+		if (especie.equals("Cachorro") || (especie.equals("Gato") || (especie.equals("Ave")))) {
 			this.especie = especie;
 		} else {
 			EspecieInvalidaException e;
@@ -33,7 +33,7 @@ public class Animal {
 			throw e;
 		}
 		
-		// Checa se foi digitada uma raça
+		// Checa se foi digitada uma raï¿½a
 		if (raca.length() > 1) {
 			this.raca = raca;
 		} else {
@@ -42,7 +42,7 @@ public class Animal {
 			throw e;
 		}
 		
-		//Checa se a idade é maior que zero
+		//Checa se a idade e maior que zero
 		if (idade > 0) {
 			this.idade = idade;
 		} else {
@@ -62,7 +62,7 @@ public class Animal {
 		return this.especie;
 	}
 	
-	//obter raça do animal
+	//obter raï¿½a do animal
 	protected String getRaca() {
 		return this.raca;
 	}
@@ -73,7 +73,7 @@ public class Animal {
 		return this.idade;
 	}
 	
-	// Método setNome se o nome entrar errado
+	// Mï¿½todo setNome se o nome entrar errado
 	protected void setNome(String nome) throws NomeCurtoException {
 		if (nome.length() > 1) {
 			this.nome = nome;
