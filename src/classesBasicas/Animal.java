@@ -10,9 +10,9 @@ public class Animal {
 	private String especie;
 	private String nome;
 	private String raca;
-	private int idade;
-	
-	protected Animal (String especie, String nome , String raca, int idade )
+	private String idAnimal;
+
+	public Animal (String especie, String nome , String raca, Cliente dono)
 			throws NomeCurtoException, EspecieInvalidaException, RacaInvalidaException, IdadeInvalidaException {
 
 		// Checa se o nome tem mais que um caracterer 
@@ -24,7 +24,7 @@ public class Animal {
 			throw e;
 		}
 		
-		// Checa se ï¿½ uma especie valida
+		// Checa se é uma especie valida
 		if (especie.equals("Cachorro") || (especie.equals("Gato") || (especie.equals("Ave")))) {
 			this.especie = especie;
 		} else {
@@ -33,7 +33,7 @@ public class Animal {
 			throw e;
 		}
 		
-		// Checa se foi digitada uma raï¿½a
+		// Checa se foi digitada uma raça
 		if (raca.length() > 1) {
 			this.raca = raca;
 		} else {
@@ -41,40 +41,37 @@ public class Animal {
 			e = new RacaInvalidaException();
 			throw e;
 		}
-		
-		//Checa se a idade e maior que zero
-		if (idade > 0) {
-			this.idade = idade;
-		} else {
-			IdadeInvalidaException e;
-			e = new IdadeInvalidaException();
-			throw e;
-		}
+
 	}
 	
 	// obter nome do animal
-	protected String getNome() {
+	public String getNome() {
 		return this.nome;
 	}
 	
 	//obter especie do animal
-	protected String getEspecie() {
+	public String getEspecie() {
 		return this.especie;
 	}
 	
-	//obter raï¿½a do animal
-	protected String getRaca() {
+	//obter raça do animal
+	public String getRaca() {
 		return this.raca;
 	}
-	
-	
-	//obter idade do animal
-	protected int getIdade() {
-		return this.idade;
+
+	//obter id do animal
+	public String getIdAnimal() {
+		idAnimal = this.nome+"#"+this.getDono().getCpf();
+		return this.idAnimal;
 	}
 	
-	// Mï¿½todo setNome se o nome entrar errado
-	protected void setNome(String nome) throws NomeCurtoException {
+	//obter o dono
+	public Cliente getDono() {
+		return this.dono;
+	}
+
+	// Método setNome se o nome entrar errado
+	public void setNome(String nome) throws NomeCurtoException {
 		if (nome.length() > 1) {
 			this.nome = nome;
 		} else {
