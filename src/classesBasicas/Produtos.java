@@ -28,11 +28,11 @@ public class Produtos {
 		}		
 	}
 	//obter o tipo
-	public Object getTipo() {
+	public String getTipo() {
 		return this.tipo;
 	}
 	//obter o valor
-	public Object getValor() {
+	public int getValor() {
 		return this.valor;
 	}
 

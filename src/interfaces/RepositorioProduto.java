@@ -7,8 +7,6 @@ import erros.ProdutoNaoEncontradoException;
 
 public interface RepositorioProduto {
 	
-	//CRIAR ERROS NOVOS
-
 	public void inserir(Produtos produto) throws LimiteAtingidoException, ProdutoJaCadastradoException;
 	public void atualizar(Produtos Produto) throws ProdutoNaoEncontradoException, ProdutoJaCadastradoException;
 	public void remover(String tipo) throws ProdutoNaoEncontradoException;
