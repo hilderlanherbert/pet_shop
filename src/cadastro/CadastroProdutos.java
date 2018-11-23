@@ -20,7 +20,7 @@ public class CadastroProdutos {
 		}
 	}
 	
-	// checa se o cliente já está cadastrado. Se não estiver, o cadastra
+	// checa se o produto já está cadastrado. Se não estiver, o cadastra
 	public void cadastrar(Produtos produto) throws LimiteAtingidoException, ProdutoJaCadastradoException {
 		if (!this.produtos.existe(produto.getTipo())) {			
 			this.produtos.inserir(produto);

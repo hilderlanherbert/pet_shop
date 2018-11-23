@@ -82,7 +82,7 @@ public class RepositorioArrayCliente implements RepositorioCliente {
 		}
 	}
 	
-	// método interno para checar se existe um objeto com um dado id
+	// método interno para checar se existe um objeto com um dado cpf
 	public boolean existe(String cpf) {
 		boolean resposta = false;
 		for (int i = 0; i < this.contador && !resposta; i++) {
