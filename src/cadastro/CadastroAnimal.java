@@ -32,8 +32,8 @@ public class CadastroAnimal {
 	}
 	
 	// chama o remover da interface
-	public void remover(String tipo) throws AnimalNaoEncontradoException {
-		this.animais.remover(tipo);
+	public void remover(String idAnimal) throws AnimalNaoEncontradoException {
+		this.animais.remover(idAnimal);
 	}
 	
 	// chama o atualizar da interface
@@ -42,8 +42,8 @@ public class CadastroAnimal {
 	}
 	
 	// chama o procurar da interface
-	public Animal animais (String tipo) throws AnimalNaoEncontradoException {
-		return this.animais.procurar(tipo);
+	public Animal procurar (String idAnimal) throws AnimalNaoEncontradoException {
+		return this.animais.procurar(idAnimal);
 	}
 	
 	// chama o existe da interface
