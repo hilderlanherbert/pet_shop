@@ -105,5 +105,4 @@ public class PetShop {
 	public Produtos procurarProdutos(String tipo) throws ProdutoNaoEncontradoException {
 		return produtos.procurar(tipo);
 	}
-	
 }
