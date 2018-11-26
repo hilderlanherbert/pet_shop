@@ -2,6 +2,6 @@ package erros;
 
 public class NumeroCartaoInvalidoException extends Exception {
 	public NumeroCartaoInvalidoException() {
-		super("Numero do cartao invalido");
+		super("Número do cartão inválido. Precisa ter 16 dígitos.");
 	}
 }

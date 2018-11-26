@@ -2,6 +2,6 @@ package erros;
 
 public class FuncionarioNaoEncontradoException extends Exception{
 	public FuncionarioNaoEncontradoException() {
-		super("Este funcio√°rio n√£o foi encontrado");
+		super("Funcion·rio n„o encontrado na base de dados.");
 	}
 }

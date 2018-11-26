@@ -2,6 +2,6 @@ package erros;
 
 public class AnimalNaoEncontradoException extends Exception {
 	public AnimalNaoEncontradoException() {
-		super("Animal nao encontrado.");
+		super("Desculpe, animal nãoo encontrado.");
 	}
 }

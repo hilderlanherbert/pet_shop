@@ -2,6 +2,6 @@ package erros;
 
 public class ProdutoJaCadastradoException extends Exception {
 	public ProdutoJaCadastradoException() {
-		super("Esse produto j√° foi cadastrado!");
+		super("Produto n„o encontrado, digite um produto v·lido.");
 	}
 }
