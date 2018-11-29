@@ -17,7 +17,10 @@ import erros.IdadeInvalidaException;
 import erros.LimiteAtingidoException;
 import erros.NomeCurtoException;
 import erros.NumeroCartaoInvalidoException;
+import erros.ProdutoNaoEncontradoException;
 import erros.SalarioMuitoBaixoException;
+import erros.TipoInvalidoException;
+import erros.ValorInvalidoException;
 import fachada.PetShop;
 
 public class main {
@@ -34,7 +37,7 @@ public class main {
 		PetShop petshop = null;
 		Cliente cliente = null;
 		Animal animal = null;
-		Produtos pacote;
+		Produtos produto;
 		Funcionario funcionario;
 
 		// Escolha do tipo do repositorio
@@ -197,6 +200,131 @@ public class main {
 					}
 
 				}
+			} else if (escolha == 2) {
+				System.out.println("O que você deseja atualizar?");
+				System.out.println("0 - Cliente");
+				System.out.println("1 - Animal");
+				System.out.println("2 - Produto");
+				System.out.println("3 - Funcionário");
+				System.out.println("4 - Voltar para o início");
+				
+				escolha = in.nextInt();
+				
+				if (escolha == 0) {
+					System.out.println("Digite o nome:");
+					nome = in.nextLine();
+					System.out.println("Digite o cpf (somente os dígitos):");
+					cpf = in.nextLine();
+					System.out.println("Digite a idade:");
+					idade = in.nextLine();
+					System.out.println("Digite o email:");
+					email = in.nextLine();
+					System.out.println("Digite o numero do cartão com 16 dígitos:");
+					numeroCartao = in.nextLine();
+					
+					// Tenta atualizar conferindo se todos os parametros estão corretos
+					try {
+						cliente = new Cliente(nome, cpf, idade, email, numeroCartao);
+						petshop.atualizarCliente(cliente);
+						System.out.println("---- Cliente atualizado com sucesso ----");
+						
+					// Caso não estejam, estes erros poderão ser lançados
+	
+					} catch (CpfInvalidoException e) {
+						System.out.println(e.getMessage());
+					} catch (IdadeInvalidaException e) {
+						System.out.println(e.getMessage());
+					} catch (EmailInvalidoException e) {
+						System.out.println(e.getMessage());
+					} catch (NumeroCartaoInvalidoException e) {
+						System.out.println(e.getMessage());
+					} catch (ClienteJaCadastradoException e) {
+						System.out.println(e.getMessage());
+					} catch (LimiteAtingidoException e) {
+						System.out.println(e.getMessage());
+					}
+					
+
+					//--------------------------------------- ANIMAL ----------------------------------------
+				} else if (escolha == 1) {
+					System.out.println("Digite o nome:");
+					nome = in.nextLine();
+					System.out.println("Digite a raça:");
+					raca = in.nextLine();
+					System.out.println("Digite a espécie:");
+					especie = in.nextLine();
+
+					// Tenta atualizar conferindo se todos os parametros estão certos
+					try {
+						animal = new Animal(nome, raca, especie, cliente);
+						petshop.atualizarAnimal(animal);
+						System.out.println("---- Animal atualizado com sucesso ----");
+						
+					// Caso não estejam, estes erros poderão ser lançados
+					} catch (LimiteAtingidoException e) {
+						System.out.println(e.getMessage());
+					}
+					
+					//----------------------------------------PRODUTO --------------------------------------_____
+				} else if (escolha == 2) {
+					System.out.println("Digite o tipo:");
+					tipo = in.nextLine();
+					System.out.println("Digite o valor");
+					valor1 = in.nextLine();
+	
+					// Tenta atualizar conferindo se todos os parametros estão certos
+					try {
+						produto = new Produtos(tipo, valor);
+						petshop.atualizarProdutos(produto);
+						System.out.println("---- Produto atualizado com sucesso ----");
+						
+					// Caso não estejam, estes erros poderão ser lançados
+					} catch (ProdutoNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					} catch (TipoInvalidoException e) {
+						System.out.println(e.getMessage());
+					} catch (ValorInvalidoException e) {
+						System.out.println(e.getMessage());
+					}
+					
+					//----------------------------------------FUNCIONARIO --------------------------------------_____
+				} else if (escolha == 3) {
+					System.out.println("Digite o nome do funcionário:");
+					nome = in.nextLine();
+					System.out.println("Digite o cpf do funcionário:");
+					cpf = in.nextLine();
+					System.out.println("Digite a idade:");
+					idade = in.nextLine();
+					System.out.println("Digite o cargo do funcionário:");
+					cargo = in.nextLine();
+					System.out.println("Digite o salário do funcionário:");
+					salario = in.nextDouble();
+					in.nextLine();
+
+					// Tenta atualizar conferindo se todos os parametros estão certos
+					try {
+						funcionario = new Funcionario(nome, cpf, idade, cargo, salario);
+						petshop.atualizarFuncionario(funcionario);
+						System.out.println("---- Funcionário atualizado com sucesso ----");
+						
+					// Caso não estejam, estes erros poderão ser lançados
+					} catch (NomeCurtoException e) {
+						System.out.println(e.getMessage());
+					} catch (FuncionarioNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					} catch (LimiteAtingidoException e) {
+						System.out.println(e.getMessage());
+					} catch (CpfInvalidoException e) {
+						System.out.println(e.getMessage());
+					} catch (SalarioMuitoBaixoException e) {
+						System.out.println(e.getMessage());
+					} catch (IdadeInvalidaException e) {
+						System.out.println(e.getMessage());
+					}
+
+				}
+				
+				
 			}
 		}
 	
