@@ -12,20 +12,25 @@ import erros.ClienteJaCadastradoException;
 import erros.ClienteNaoEncontradoException;
 import erros.CpfInvalidoException;
 import erros.EmailInvalidoException;
+import erros.EspecieInvalidaException;
 import erros.FuncionarioJaCadastradoException;
 import erros.FuncionarioNaoEncontradoException;
 import erros.IdadeInvalidaException;
 import erros.LimiteAtingidoException;
 import erros.NomeCurtoException;
 import erros.NumeroCartaoInvalidoException;
+import erros.ProdutoJaCadastradoException;
 import erros.ProdutoNaoEncontradoException;
+import erros.RacaInvalidaException;
 import erros.SalarioMuitoBaixoException;
 import erros.TipoInvalidoException;
 import erros.ValorInvalidoException;
 import fachada.PetShop;
 
 public class main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NomeCurtoException, EspecieInvalidaException, RacaInvalidaException,
+	IdadeInvalidaException, TipoInvalidoException, ValorInvalidoException, ClienteNaoEncontradoException, AnimalNaoEncontradoException, 
+	AnimalJaCadastradoException, FuncionarioJaCadastradoException, ProdutoJaCadastradoException {
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("Olï¿½, bem vindo ao PetShop");
@@ -34,7 +39,8 @@ public class main {
 
 		int escolha, valor, duracao, carrinho=0;
 		double salario;
-		String nome = null, cpf, idade, email, numeroCartao, id, cargo, dono, especie, raca, idAnimal, tipo, valor1;
+		String nome = null, cpf, idade, email, numeroCartao, id, cargo, dono, especie, raca, idAnimal = null, tipo, nomeAnimal;
+		int valorProduto;
 		PetShop petshop = null;
 		Cliente cliente = null;
 		Animal animal = null;
@@ -64,14 +70,14 @@ public class main {
 			System.out.println("(Para encerrar o sistema digite -1)");
 
 			escolha = in.nextInt();
-			//----------------------------------- CADASTRAR -------------------------------------
+//-------------------------------------------------- CADASTRAR -------------------------------------------------------------
 			if (escolha == 0) {
 				System.out.println("O que voce deseja cadastrar?");
 				System.out.println("0 - Cliente");
 				System.out.println("1 - Animal");
 				System.out.println("2 - Produto");
-				System.out.println("3 - Funcionï¿½rio");
-				System.out.println("4 - Voltar para o inï¿½cio");
+				System.out.println("3 - Funcionario");
+				System.out.println("4 - Voltar para o inicio");
 				
 				escolha = in.nextInt();
 				in.nextLine();
@@ -80,22 +86,22 @@ public class main {
 				if (escolha == 0) {
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
-					System.out.println("Digite o cpf (somente os dï¿½gitos):");
+					System.out.println("Digite o cpf (somente os digitos):");
 					cpf = in.nextLine();
 					System.out.println("Digite a idade:");
 					idade = in.nextLine();
 					System.out.println("Digite o email:");
 					email = in.nextLine();
-					System.out.println("Digite o numero do cartï¿½o com 16 dï¿½gitos:");
+					System.out.println("Digite o numero do cartao com 16 digitos:");
 					numeroCartao = in.nextLine();
 					
-					// Tenta cadastrar conferindo se todos os parametros estï¿½o certos
+					// Tenta cadastrar conferindo se todos os parametros estao certos
 					try {
 						cliente = new Cliente(nome, cpf, idade, email, numeroCartao);
 						petshop.cadastrarCliente(cliente);
 						System.out.println("---- Cliente cadastrado com sucesso ----");
 						
-					// Caso nï¿½o estejam, estes erros poderï¿½o ser lanï¿½ados
+					// Caso nao estejam, estes erros poderao ser lancados
 	
 					} catch (CpfInvalidoException e) {
 						System.out.println(e.getMessage());
@@ -118,16 +124,16 @@ public class main {
 					nome = in.nextLine();
 					System.out.println("Digite a raca:");
 					raca = in.nextLine();
-					System.out.println("Digite a espï¿½cie:");
+					System.out.println("Digite a especie:");
 					especie = in.nextLine();
 
-					// Tenta cadastrar conferindo se todos os parametros estï¿½o certos
+					// Tenta cadastrar conferindo se todos os parametros estao certos
 					try {
 						animal = new Animal(nome, raca, especie, cliente);
 						petshop.cadastrarAnimal(animal);
 						System.out.println("---- Animal cadastrado com sucesso ----");
 						
-					// Caso nï¿½o estejam, estes erros poderï¿½o ser lanï¿½ados
+					// Caso nao estejam, estes erros poderao ser lancados
 					} catch (AnimalJaCadastradoException e) {
 						System.out.println(e.getMessage());
 					} catch (LimiteAtingidoException e) {
@@ -139,54 +145,40 @@ public class main {
 					System.out.println("Digite o produto a ser cadastrado:");
 					tipo = in.nextLine();
 					System.out.println("Digite o valor do produto:");
-					valor1 = in.nextLine();
+					valorProduto = in.nextInt();
 				
 					try {
-						cliente = petshop.procurarProduto(tipo);
-					} catch (ProdutoNaoEncontradoException e) {
+						produto = new Produtos(tipo, valorProduto);
+						petshop.cadastrarProdutos(produto);
+						System.out.println("---- Produto cadastrado com sucesso ----");
+
+					} catch (ProdutoJaCadastradoException e) {
+						System.out.println(e.getMessage());
+					} catch (LimiteAtingidoException e) {
 						System.out.println(e.getMessage());
 					}
 					
-					
-					try {
-						destino = cinbora.procurarDestino(cidade);
-						destinoOk = true;
-					} catch (DestinoNaoEncontradoException e) {
-						System.out.println(e.getMessage());
-					}
-					
-					System.out.println("Digite o valor do pacote:");
-					valor = in.nextInt();
-					in.nextLine();
-					
-					System.out.println("Digite o nï¿½mero de meses do pacote:");
-					duracao = in.nextInt();
-					in.nextLine();
-					
-					System.out.println("Digite o identificador do pacote:");
-					id = in.nextLine();
-				
 					//--------------------------------------- FUNCIONARIO ----------------------------------------
 				} else if (escolha == 3) {
-					System.out.println("Digite o nome do funcionï¿½rio:");
+					System.out.println("Digite o nome do funcionario:");
 					nome = in.nextLine();
-					System.out.println("Digite o cpf do funcionï¿½rio (somente os dï¿½gitos):");
+					System.out.println("Digite o cpf do funcionario (somente os digitos):");
 					cpf = in.nextLine();
-					System.out.println("Digite a data de nascimento (no formato xx/xx/xxxx):");
+					System.out.println("Digite a idade:");
 					idade = in.nextLine();
-					System.out.println("Digite o cargo do funcionï¿½rio:");
+					System.out.println("Digite o cargo do funcionario:");
 					cargo = in.nextLine();
-					System.out.println("Digite o salï¿½rio do funcionï¿½rio:");
+					System.out.println("Digite o salario do funcionario:");
 					salario = in.nextDouble();
 					in.nextLine();
 
-					// Tenta cadastrar conferindo se todos os parametros estï¿½o certos
+					// Tenta cadastrar conferindo se todos os parametros estao certos
 					try {
 						funcionario = new Funcionario(nome, cpf, idade, cargo, salario);
 						petshop.cadastrarFuncionario(funcionario);
-						System.out.println("---- Funcionï¿½rio cadastrado com sucesso ----");
+						System.out.println("---- Funcionario cadastrado com sucesso ----");
 						
-					// Caso nï¿½o estejam, estes erros poderï¿½o ser lanï¿½ados
+					// Caso nao estejam, estes erros poderao ser lancados
 					} catch (NomeCurtoException e) {
 						System.out.println(e.getMessage());
 					} catch (FuncionarioJaCadastradoException e) {
@@ -202,7 +194,80 @@ public class main {
 					}
 
 				}
-				//----------------------------------- ATUALIZAR -------------------------------------
+//---------------------------------------------------------- REMOVER -------------------------------------------------------------
+			} else if (escolha == 1) {
+				System.out.println("O que voce deseja remover?");
+				System.out.println("0 - Cliente");
+				System.out.println("1 - Animal");
+				System.out.println("2 - Produto");
+				System.out.println("3 - Funcionario");
+				System.out.println("4 - Voltar para o inicio");
+				
+				escolha = in.nextInt();
+				in.nextLine();
+				
+				//----------------------------------- CLIENTE -------------------------------------
+				if (escolha == 0) {
+					System.out.println("Digite o cpf do cliente que vai ser removido:");
+					cpf = in.nextLine();
+					
+					// Confere se existe para remover e procura o nome para dizer quem removeu 
+					try {
+						nome = petshop.procurarCliente(cpf).getNome();
+						petshop.removerCliente(cpf);
+						System.out.println("---- Cliente " + nome + " removido com sucesso ----");
+						
+					// Caso não exista, manda este erro
+					} catch (ClienteNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					}
+				//----------------------------------- ANIMAL -------------------------------------
+				} else if (escolha == 1) {
+					System.out.println("Digite o CPF do dono e o nome do animal que vai ser removida:");
+					nomeAnimal = in.nextLine();
+					cpf=in.nextLine();
+					
+					// Confere se o animal existe para remover
+					try {
+						petshop.removerAnimal(idAnimal);
+						System.out.println("---- Animal "+nomeAnimal+" removido com sucesso ----");
+						
+					// Caso não, manda este erro
+					} catch (AnimalNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					}
+					
+				//----------------------------------- PRODUTO -------------------------------------
+				} else if (escolha == 2) {
+					System.out.println("Digite o tipo do produto que vai ser removido:");
+					tipo = in.nextLine();
+					
+					// Confere se o pacote existe para remover
+					try {
+						petshop.removerProdutos(tipo);
+						System.out.println("---- Produto " + tipo + " removido com sucesso ----");
+					// Caso não exista, manda esse erro
+					} catch (ProdutoNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					}
+				//--------------------------------- FUNCIONARIO -------------------------------------
+				} else if (escolha == 3) {
+					System.out.println("Digite o cpf do funcionário que vai ser removido:");
+					cpf = in.nextLine();
+					
+					// Confere se existe para remover e procura o nome para dizer quem removeu
+					try {
+						nome = petshop.procurarFuncionario(cpf).getNome();
+						petshop.removerFuncionario(cpf);
+						System.out.println("---- Funcionario " + nome + " removido com sucesso ----");
+					
+					// Caso não exista, manda este erro
+					} catch (FuncionarioNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					}
+
+				}
+//----------------------------------------------------- ATUALIZAR -------------------------------------------------
 			} else if (escolha == 2) {
 				System.out.println("O que voce deseja atualizar?");
 				System.out.println("0 - Cliente");
@@ -216,22 +281,22 @@ public class main {
 				if (escolha == 0) {
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
-					System.out.println("Digite o cpf (somente os dï¿½gitos):");
+					System.out.println("Digite o cpf (somente os digitos):");
 					cpf = in.nextLine();
 					System.out.println("Digite a idade:");
 					idade = in.nextLine();
 					System.out.println("Digite o email:");
 					email = in.nextLine();
-					System.out.println("Digite o numero do cartï¿½o com 16 dï¿½gitos:");
+					System.out.println("Digite o numero do cartao com 16 digitos:");
 					numeroCartao = in.nextLine();
 					
-					// Tenta atualizar conferindo se todos os parametros estï¿½o corretos
+					// Tenta atualizar conferindo se todos os parametros estao corretos
 					try {
 						cliente = new Cliente(nome, cpf, idade, email, numeroCartao);
 						petshop.atualizarCliente(cliente);
 						System.out.println("---- Cliente atualizado com sucesso ----");
 						
-					// Caso nï¿½o estejam, estes erros poderï¿½o ser lanï¿½ados
+					// Caso nï¿½o estejam, estes erros poderao ser lancados
 	
 					} catch (CpfInvalidoException e) {
 						System.out.println(e.getMessage());
@@ -257,13 +322,13 @@ public class main {
 					System.out.println("Digite a espï¿½cie:");
 					especie = in.nextLine();
 
-					// Tenta atualizar conferindo se todos os parametros estï¿½o certos
+					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
 						animal = new Animal(nome, raca, especie, cliente);
 						petshop.atualizarAnimal(animal);
 						System.out.println("---- Animal atualizado com sucesso ----");
 						
-					// Caso nï¿½o estejam, estes erros poderï¿½o ser lanï¿½ados
+					// Caso nï¿½o estejam, estes erros poderï¿½o ser lancados
 					} catch (LimiteAtingidoException e) {
 						System.out.println(e.getMessage());
 					}
@@ -273,11 +338,11 @@ public class main {
 					System.out.println("Digite o tipo:");
 					tipo = in.nextLine();
 					System.out.println("Digite o valor");
-					valor1 = in.nextLine();
+					valorProduto = in.nextInt();
 	
-					// Tenta atualizar conferindo se todos os parametros estï¿½o certos
+					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
-						produto = new Produtos(tipo, valor);
+						produto = new Produtos(tipo, valorProduto);
 						petshop.atualizarProdutos(produto);
 						System.out.println("---- Produto atualizado com sucesso ----");
 						
@@ -292,19 +357,19 @@ public class main {
 					
 					//----------------------------------------FUNCIONARIO --------------------------------------_____
 				} else if (escolha == 3) {
-					System.out.println("Digite o nome do funcionï¿½rio:");
+					System.out.println("Digite o nome do funcionario:");
 					nome = in.nextLine();
-					System.out.println("Digite o cpf do funcionï¿½rio:");
+					System.out.println("Digite o cpf do funcionario:");
 					cpf = in.nextLine();
 					System.out.println("Digite a idade:");
 					idade = in.nextLine();
-					System.out.println("Digite o cargo do funcionï¿½rio:");
+					System.out.println("Digite o cargo do funcionario:");
 					cargo = in.nextLine();
-					System.out.println("Digite o salï¿½rio do funcionï¿½rio:");
+					System.out.println("Digite o salï¿½rio do funcionario:");
 					salario = in.nextDouble();
 					in.nextLine();
 
-					// Tenta atualizar conferindo se todos os parametros estï¿½o certos
+					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
 						funcionario = new Funcionario(nome, cpf, idade, cargo, salario);
 						petshop.atualizarFuncionario(funcionario);
@@ -327,7 +392,7 @@ public class main {
 
 				}
 				
-				//----------------------------------- PROCURAR -------------------------------------	
+//-------------------------------------------------------- PROCURAR -------------------------------------	
 			} else if (escolha == 3) {
 				System.out.println("O que voce deseja procurar?");
 				System.out.println("0 - Cliente");
