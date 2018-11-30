@@ -3,7 +3,10 @@ package cadastro;
 import classesBasicas.Animal;
 import erros.AnimalJaCadastradoException;
 import erros.AnimalNaoEncontradoException;
+import erros.EspecieInvalidaException;
 import erros.LimiteAtingidoException;
+import erros.NomeCurtoException;
+import erros.RacaInvalidaException;
 import interfaces.RepositorioAnimal;
 import repositorio.RepositorioArrayAnimal;
 import repositorio.RepositorioListaAnimal;
@@ -21,7 +24,7 @@ public class CadastroAnimal {
 	}
 	
 	// checa se o cliente já está cadastrado. Se não estiver, o cadastra
-	public void cadastrar(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException {
+	public void cadastrar(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException, NomeCurtoException, RacaInvalidaException, EspecieInvalidaException {
 		if (!this.animais.existe(animais.getIdAnimal())) {			
 			this.animais.inserir(animais);
 		} else {
@@ -37,7 +40,7 @@ public class CadastroAnimal {
 	}
 	
 	// chama o atualizar da interface
-	public void atualizar(Animal animais) throws AnimalNaoEncontradoException, AnimalJaCadastradoException {
+	public void atualizar(Animal animais) throws AnimalNaoEncontradoException, AnimalJaCadastradoException, NomeCurtoException, EspecieInvalidaException, RacaInvalidaException {
 		this.animais.atualizar(animais);
 	}
 	

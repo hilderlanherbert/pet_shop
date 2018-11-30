@@ -306,12 +306,7 @@ public class main {
 						System.out.println(e.getMessage());
 					} catch (NumeroCartaoInvalidoException e) {
 						System.out.println(e.getMessage());
-					} catch (ClienteJaCadastradoException e) {
-						System.out.println(e.getMessage());
-					} catch (LimiteAtingidoException e) {
-						System.out.println(e.getMessage());
-					}
-					
+					} 	
 
 					//--------------------------------------- ANIMAL ----------------------------------------
 				} else if (escolha == 1) {
@@ -327,9 +322,14 @@ public class main {
 						animal = new Animal(nome, raca, especie, cliente);
 						petshop.atualizarAnimal(animal);
 						System.out.println("---- Animal atualizado com sucesso ----");
+					}
 						
 					// Caso n�o estejam, estes erros poder�o ser lancados
-					} catch (LimiteAtingidoException e) {
+					catch (NomeCurtoException e) {
+						System.out.println(e.getMessage());
+					} catch (EspecieInvalidaException e) {
+						System.out.println(e.getMessage());
+					} catch (RacaInvalidaException e) {
 						System.out.println(e.getMessage());
 					}
 					
@@ -380,9 +380,7 @@ public class main {
 						System.out.println(e.getMessage());
 					} catch (FuncionarioNaoEncontradoException e) {
 						System.out.println(e.getMessage());
-					} catch (LimiteAtingidoException e) {
-						System.out.println(e.getMessage());
-					} catch (CpfInvalidoException e) {
+					}  catch (CpfInvalidoException e) {
 						System.out.println(e.getMessage());
 					} catch (SalarioMuitoBaixoException e) {
 						System.out.println(e.getMessage());

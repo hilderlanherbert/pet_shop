@@ -10,13 +10,16 @@ import classesBasicas.Funcionario;
 import classesBasicas.Produtos;
 import erros.ClienteJaCadastradoException;
 import erros.ClienteNaoEncontradoException;
+import erros.EspecieInvalidaException;
 import erros.FuncionarioJaCadastradoException;
 import erros.FuncionarioNaoEncontradoException;
 import erros.LimiteAtingidoException;
+import erros.NomeCurtoException;
 import erros.AnimalJaCadastradoException;
 import erros.AnimalNaoEncontradoException;
 import erros.ProdutoJaCadastradoException;
 import erros.ProdutoNaoEncontradoException;
+import erros.RacaInvalidaException;
 
 public class PetShop {
 	private CadastroCliente clientes;
@@ -71,7 +74,7 @@ public class PetShop {
 	}
 	
 	//Animal
-	public void cadastrarAnimal(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException {
+	public void cadastrarAnimal(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException, NomeCurtoException, RacaInvalidaException, EspecieInvalidaException {
 		animal.cadastrar(animais);
 	}
 
@@ -80,7 +83,7 @@ public class PetShop {
 	}
 
 	public void atualizarAnimal(Animal animais)
-			throws AnimalNaoEncontradoException, AnimalJaCadastradoException {
+			throws AnimalNaoEncontradoException, AnimalJaCadastradoException, NomeCurtoException, EspecieInvalidaException, RacaInvalidaException {
 		animal.atualizar(animais);
 	}
 
