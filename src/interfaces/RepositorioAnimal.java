@@ -12,4 +12,5 @@ public interface RepositorioAnimal {
 	public void remover(String idAnimal) throws AnimalNaoEncontradoException;
 	public Animal procurar(String idAnimal) throws AnimalNaoEncontradoException;
 	public boolean existe(String idAnimal);
+	
 }
