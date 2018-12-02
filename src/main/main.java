@@ -67,7 +67,6 @@ public class main {
 			System.out.println("1 - Remover");
 			System.out.println("2 - Atualizar");
 			System.out.println("3 - Procurar");
-			System.out.println("3 - Comprar");
 			System.out.println("(Para encerrar o sistema digite -1)");
 
 			escolha = in.nextInt();
@@ -291,7 +290,7 @@ public class main {
 				System.out.println("4 - Voltar para o in�cio");
 				
 				escolha = in.nextInt();
-				
+				in.nextLine();				
 				if (escolha == 0) {
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
@@ -415,7 +414,8 @@ public class main {
 				System.out.println("3 - Funcionario");
 				System.out.println("4 - Voltar para o inicio");
 				
-				
+				escolha = in.nextInt();
+				in.nextLine();
 				//----------------------------------- CLIENTE -------------------------------------
 				if (escolha == 0) {
 					System.out.println("Digite o cpf do cliente que voce deseja procurar:");
