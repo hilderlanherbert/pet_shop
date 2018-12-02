@@ -12,7 +12,7 @@ public class Animal {
 	private String raca;
 	private String idAnimal;
 
-	public Animal (String especie, String nome , String raca, Cliente dono)
+	public Animal (String nome, String especie, String raca, String dono)
 			throws NomeCurtoException, EspecieInvalidaException, RacaInvalidaException, IdadeInvalidaException {
 
 		// Checa se o nome tem mais que um caracterer 
@@ -25,7 +25,7 @@ public class Animal {
 		}
 		
 		// Checa se é uma especie valida
-		if (especie.equals("Cachorro") || (especie.equals("Gato") || (especie.equals("Ave")))) {
+		if (especie.equals("cachorro") || especie.equals("gato") || especie.equals("ave")) {
 			this.especie = especie;
 		} else {
 			EspecieInvalidaException e;

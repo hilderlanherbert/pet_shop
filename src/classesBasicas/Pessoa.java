@@ -12,7 +12,7 @@ public abstract class Pessoa {
             throws NomeCurtoException, CpfInvalidoException, IdadeInvalidaException {
 
         // Checa se o nome tem mais que 200 caracteres (Invalido)
-        if (nome.length() > 3) {
+        if (nome.length() >= 3) {
             this.nome = nome;
         } else {
             NomeCurtoException e;

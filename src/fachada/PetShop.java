@@ -10,6 +10,7 @@ import classesBasicas.Funcionario;
 import classesBasicas.Produtos;
 import erros.ClienteJaCadastradoException;
 import erros.ClienteNaoEncontradoException;
+import erros.DonoNaoEncontradoException;
 import erros.FuncionarioJaCadastradoException;
 import erros.FuncionarioNaoEncontradoException;
 import erros.LimiteAtingidoException;
@@ -71,7 +72,7 @@ public class PetShop {
 	}
 	
 	//Animal
-	public void cadastrarAnimal(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException {
+	public void cadastrarAnimal(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException, DonoNaoEncontradoException {
 		animal.cadastrar(animais);
 	}
 

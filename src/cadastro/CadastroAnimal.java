@@ -3,6 +3,7 @@ package cadastro;
 import classesBasicas.Animal;
 import erros.AnimalJaCadastradoException;
 import erros.AnimalNaoEncontradoException;
+import erros.DonoNaoEncontradoException;
 import erros.LimiteAtingidoException;
 import interfaces.RepositorioAnimal;
 import repositorio.RepositorioArrayAnimal;
@@ -21,7 +22,7 @@ public class CadastroAnimal {
 	}
 	
 	// checa se o cliente já está cadastrado. Se não estiver, o cadastra
-	public void cadastrar(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException {
+	public void cadastrar(Animal animais) throws LimiteAtingidoException, AnimalJaCadastradoException, DonoNaoEncontradoException {
 		if (!this.animais.existe(animais.getIdAnimal())) {			
 			this.animais.inserir(animais);
 		} else {

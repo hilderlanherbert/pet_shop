@@ -11,6 +11,7 @@ import erros.AnimalNaoEncontradoException;
 import erros.ClienteJaCadastradoException;
 import erros.ClienteNaoEncontradoException;
 import erros.CpfInvalidoException;
+import erros.DonoNaoEncontradoException;
 import erros.EmailInvalidoException;
 import erros.EspecieInvalidaException;
 import erros.FuncionarioJaCadastradoException;
@@ -30,12 +31,12 @@ import fachada.PetShop;
 public class main {
 	public static void main(String[] args) throws NomeCurtoException, EspecieInvalidaException, RacaInvalidaException,
 	IdadeInvalidaException, TipoInvalidoException, ValorInvalidoException, ClienteNaoEncontradoException, AnimalNaoEncontradoException, 
-	AnimalJaCadastradoException, FuncionarioJaCadastradoException, ProdutoJaCadastradoException {
+	AnimalJaCadastradoException, FuncionarioJaCadastradoException, ProdutoJaCadastradoException, DonoNaoEncontradoException {
 		Scanner in = new Scanner(System.in);
 
-		System.out.println("Ol�, bem vindo ao PetShop");
+		System.out.println("Ola, bem vindo ao PetShop");
 		System.out
-				.println("Voc� deseja utilizar nosso sistema em array ou lista? (Digite 0 para array e 1 para lista)");
+				.println("Voce deseja utilizar nosso sistema em array ou lista? (Digite 0 para array e 1 para lista)");
 
 		int escolha, valor, duracao, carrinho=0;
 		double salario;
@@ -61,7 +62,7 @@ public class main {
 		//Loop do programa
 		while (escolha >= 0) {
 
-			System.out.println("O que voc� deseja fazer?");
+			System.out.println("O que voce deseja fazer?");
 			System.out.println("0 - Cadastrar");
 			System.out.println("1 - Remover");
 			System.out.println("2 - Atualizar");
@@ -115,21 +116,28 @@ public class main {
 						System.out.println(e.getMessage());
 					} catch (LimiteAtingidoException e) {
 						System.out.println(e.getMessage());
+					} catch (NomeCurtoException e) {
+						System.out.println(e.getMessage());
 					}
 					
 
 					//--------------------------------------- ANIMAL ----------------------------------------
 				} else if (escolha == 1) {
+					System.out.println("\nATENCAO: para cadastrar um animal, o dono tem que ter sido cadastrado anteriormente.");
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
-					System.out.println("Digite a raca:");
-					raca = in.nextLine();
-					System.out.println("Digite a especie:");
+					System.out.println("Digite a especie(cachorro, gato ou ave):");
 					especie = in.nextLine();
+					System.out.println("Digite a raca(caso seja vira-lata, digite SRD):");
+					raca = in.nextLine();
+					System.out.println("Digite o CPF do dono:");
+					dono = in.nextLine();
 
+				
 					// Tenta cadastrar conferindo se todos os parametros estao certos
 					try {
-						animal = new Animal(nome, raca, especie, cliente);
+						animal = new Animal(nome, especie, raca, dono);
+						petshop.procurarCliente(dono);
 						petshop.cadastrarAnimal(animal);
 						System.out.println("---- Animal cadastrado com sucesso ----");
 						
@@ -137,6 +145,12 @@ public class main {
 					} catch (AnimalJaCadastradoException e) {
 						System.out.println(e.getMessage());
 					} catch (LimiteAtingidoException e) {
+						System.out.println(e.getMessage());
+					} catch (EspecieInvalidaException e) {
+						System.out.println(e.getMessage());
+					} catch (ClienteNaoEncontradoException e) {
+						System.out.println(e.getMessage());
+					} catch (NomeCurtoException e) {
 						System.out.println(e.getMessage());
 					}
 
@@ -317,14 +331,16 @@ public class main {
 				} else if (escolha == 1) {
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
-					System.out.println("Digite a ra�a:");
+					System.out.println("Digite a raca:");
 					raca = in.nextLine();
-					System.out.println("Digite a esp�cie:");
+					System.out.println("Digite a especie:");
 					especie = in.nextLine();
+					System.out.println("Digite o CPF do dono");
+					dono = in.nextLine();
 
 					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
-						animal = new Animal(nome, raca, especie, cliente);
+						animal = new Animal(nome, raca, especie, dono);
 						petshop.cadastrarAnimal(animal);
 						System.out.println("---- Animal atualizado com sucesso ----");
 						
@@ -470,6 +486,6 @@ public class main {
 				
 			}
 		}
-	
+		System.out.println("---- Sistema encerrado ----");
 	}
 }
