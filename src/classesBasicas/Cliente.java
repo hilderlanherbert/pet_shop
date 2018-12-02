@@ -72,7 +72,7 @@ public class Cliente extends Pessoa {
 			return super.getIdade();
 		}
 
-		public boolean equals(Cliente cliente) {
+		public boolean existe(Cliente cliente) {
 			return (this.getCpf().equals(cliente.getCpf()));
 		}
 }

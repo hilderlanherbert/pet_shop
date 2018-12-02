@@ -293,7 +293,7 @@ public class main {
 					// Tenta atualizar conferindo se todos os parametros estao corretos
 					try {
 						cliente = new Cliente(nome, cpf, idade, email, numeroCartao);
-						petshop.atualizarCliente(cliente);
+						petshop.cadastrarCliente(cliente);
 						System.out.println("---- Cliente atualizado com sucesso ----");
 						
 					// Caso n�o estejam, estes erros poderao ser lancados
@@ -325,7 +325,7 @@ public class main {
 					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
 						animal = new Animal(nome, raca, especie, cliente);
-						petshop.atualizarAnimal(animal);
+						petshop.cadastrarAnimal(animal);
 						System.out.println("---- Animal atualizado com sucesso ----");
 						
 					// Caso n�o estejam, estes erros poder�o ser lancados
@@ -372,13 +372,11 @@ public class main {
 					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
 						funcionario = new Funcionario(nome, cpf, idade, cargo, salario);
-						petshop.atualizarFuncionario(funcionario);
+						petshop.cadastrarFuncionario(funcionario);
 						System.out.println("---- Funcionario atualizado com sucesso ----");
 						
 					// Caso nao estejam, estes erros podem ser lancados
 					} catch (NomeCurtoException e) {
-						System.out.println(e.getMessage());
-					} catch (FuncionarioNaoEncontradoException e) {
 						System.out.println(e.getMessage());
 					} catch (LimiteAtingidoException e) {
 						System.out.println(e.getMessage());
