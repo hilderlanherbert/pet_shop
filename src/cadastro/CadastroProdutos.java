@@ -37,7 +37,7 @@ public class CadastroProdutos {
 	}
 	
 	// chama o atualizar da interface
-	public void atualizar(Produtos produto) throws ProdutoNaoEncontradoException, ProdutoJaCadastradoException {
+	public void atualizar(Produtos produto) throws ProdutoNaoEncontradoException, ProdutoJaCadastradoException, LimiteAtingidoException {
 		this.produtos.atualizar(produto);
 	}
 	

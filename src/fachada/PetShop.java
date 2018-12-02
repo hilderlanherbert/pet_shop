@@ -102,7 +102,7 @@ public class PetShop {
 	}
 
 	public void atualizarProdutos(Produtos produto)
-			throws ProdutoNaoEncontradoException, ProdutoJaCadastradoException {
+			throws ProdutoNaoEncontradoException, ProdutoJaCadastradoException, LimiteAtingidoException {
 		produtos.atualizar(produto);
 	}
 

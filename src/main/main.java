@@ -31,7 +31,7 @@ import fachada.PetShop;
 public class main {
 	public static void main(String[] args) throws NomeCurtoException, EspecieInvalidaException, RacaInvalidaException,
 	IdadeInvalidaException, TipoInvalidoException, ValorInvalidoException, ClienteNaoEncontradoException, AnimalNaoEncontradoException, 
-	AnimalJaCadastradoException, FuncionarioJaCadastradoException, ProdutoJaCadastradoException, DonoNaoEncontradoException {
+	AnimalJaCadastradoException, FuncionarioJaCadastradoException, ProdutoJaCadastradoException, DonoNaoEncontradoException, LimiteAtingidoException {
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("Ola, bem vindo ao PetShop");
