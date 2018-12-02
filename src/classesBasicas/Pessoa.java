@@ -52,7 +52,7 @@ public abstract class Pessoa {
         return this.cpf;
     }
 
-    protected String getIdade() {
+    public String getIdade() {
         return this.idade;
     }
 }

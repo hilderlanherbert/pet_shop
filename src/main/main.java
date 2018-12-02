@@ -287,7 +287,7 @@ public class main {
 				System.out.println("1 - Animal");
 				System.out.println("2 - Produto");
 				System.out.println("3 - Funcion�rio");
-				System.out.println("4 - Voltar para o in�cio");
+				System.out.println("4 - Voltar para o inicio");
 				
 				escolha = in.nextInt();
 				in.nextLine();				
@@ -380,7 +380,7 @@ public class main {
 					idade = in.nextLine();
 					System.out.println("Digite o cargo do funcionario:");
 					cargo = in.nextLine();
-					System.out.println("Digite o sal�rio do funcionario:");
+					System.out.println("Digite o salario do funcionario:");
 					salario = in.nextDouble();
 					in.nextLine();
 
@@ -423,8 +423,8 @@ public class main {
 					
 					// Procura se existe e informa todos as variaveis de cliente
 					try {
-						System.out.println("O nome do cliente: " + petshop.procurarCliente(cpf).getNome());
-						System.out.println("A data de nascimento: " + petshop.procurarCliente(cpf).getIdade());
+						System.out.println("\nO nome do cliente: " + petshop.procurarCliente(cpf).getNome());
+						System.out.println("Idade: " + petshop.procurarCliente(cpf).getIdade());
 						System.out.println("O email: " + petshop.procurarCliente(cpf).getEmail());
 						System.out.println("O numero do cartao: " + petshop.procurarCliente(cpf).getNumeroCartao());
 						
@@ -440,7 +440,7 @@ public class main {
 					
 					// Procura se existe e informa todos as variaveis de animal
 					try {
-						System.out.println("O nome do animal: " + petshop.procurarAnimal(idAnimal).getNome());
+						System.out.println("\nO nome do animal: " + petshop.procurarAnimal(idAnimal).getNome());
 						System.out.println("Especie: " + petshop.procurarAnimal(idAnimal).getEspecie());
 						System.out.println("Raca: " + petshop.procurarAnimal(idAnimal).getRaca());
 						System.out.println("Dono: " + petshop.procurarAnimal(idAnimal).getDono().getNome());
@@ -473,8 +473,8 @@ public class main {
 					
 					// Procura se existe e informa todos as variaveis de funcionario
 					try {
-						System.out.println("O nome do funcionario: " + petshop.procurarFuncionario(cpf).getNome());
-						System.out.println("A data de nascimento: " + petshop.procurarFuncionario(cpf).getDataNascimento());
+						System.out.println("\nO nome do funcionario: " + petshop.procurarFuncionario(cpf).getNome());
+						System.out.println("Idade: " + petshop.procurarFuncionario(cpf).getIdade());
 						System.out.println("O cargo: " + petshop.procurarFuncionario(cpf).getCargo());
 						System.out.println("O salario: " + petshop.procurarFuncionario(cpf).getSalario() + " reais");
 						
