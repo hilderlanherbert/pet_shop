@@ -29,8 +29,15 @@ public abstract class Pessoa {
             throw e;
         }
 
-        // Checa a quantidade de digitos da idade
-
+        // Checa se a idade é valida
+        
+        if (Integer.parseInt(idade) > 0 && Integer.parseInt(idade) < 150 ) {
+			this.idade = idade;
+		} else {
+			IdadeInvalidaException e;
+			e = new IdadeInvalidaException();
+			throw e;
+		}
     }
 
     protected String getNome() {

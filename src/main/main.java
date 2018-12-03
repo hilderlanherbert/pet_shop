@@ -40,7 +40,8 @@ public class main {
 
 		int escolha, valor, duracao, carrinho=0;
 		double salario;
-		String nome = null, cpf, idade, email, numeroCartao, id, cargo, dono, especie, raca, idAnimal = null, tipo, nomeAnimal;
+		String nome = null, cpf, idade, email, numeroCartao, id, cargo, especie, raca, idAnimal = null, tipo, nomeAnimal;
+		Cliente dono;
 		int valorProduto;
 		PetShop petshop = null;
 		Cliente cliente = null;
@@ -130,13 +131,13 @@ public class main {
 					System.out.println("Digite a raca(caso seja vira-lata, digite SRD):");
 					raca = in.nextLine();
 					System.out.println("Digite o CPF do dono:");
-					dono = in.nextLine();
+					cpf = in.nextLine();
 
 				
 					// Tenta cadastrar conferindo se todos os parametros estao certos
 					try {
+						dono = petshop.procurarCliente(cpf);
 						animal = new Animal(nome, especie, raca, dono);
-						petshop.procurarCliente(dono);
 						petshop.cadastrarAnimal(animal);
 						System.out.println("---- Animal cadastrado com sucesso ----");
 						
@@ -150,6 +151,8 @@ public class main {
 					} catch (ClienteNaoEncontradoException e) {
 						System.out.println(e.getMessage());
 					} catch (NomeCurtoException e) {
+						System.out.println(e.getMessage());
+					}  catch (RacaInvalidaException e) {
 						System.out.println(e.getMessage());
 					}
 
@@ -236,14 +239,18 @@ public class main {
 					}
 				//----------------------------------- ANIMAL -------------------------------------
 				} else if (escolha == 1) {
-					System.out.println("Digite o CPF do dono e o nome do animal que vai ser removida:");
+					System.out.println("Digite o nome do animal");
 					nomeAnimal = in.nextLine();
+					System.out.println("Digite o CPF do dono do animal para remove-lo");
 					cpf=in.nextLine();
+					
+					idAnimal = nomeAnimal+"#"+cpf;
+					System.out.println(idAnimal);
 					
 					// Confere se o animal existe para remover
 					try {
 						petshop.removerAnimal(idAnimal);
-						System.out.println("---- Animal "+nomeAnimal+" removido com sucesso ----");
+						System.out.println("---- Animal " +nomeAnimal+" removido com sucesso ----");
 						
 					// Caso não, manda este erro
 					} catch (AnimalNaoEncontradoException e) {
@@ -286,12 +293,13 @@ public class main {
 				System.out.println("0 - Cliente");
 				System.out.println("1 - Animal");
 				System.out.println("2 - Produto");
-				System.out.println("3 - Funcionï¿½rio");
+				System.out.println("3 - Funcionario");
 				System.out.println("4 - Voltar para o inicio");
 				
 				escolha = in.nextInt();
 				in.nextLine();				
 				if (escolha == 0) {
+					
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
 					System.out.println("Digite o cpf (somente os digitos):");
@@ -306,7 +314,7 @@ public class main {
 					// Tenta atualizar conferindo se todos os parametros estao corretos
 					try {
 						cliente = new Cliente(nome, cpf, idade, email, numeroCartao);
-						petshop.cadastrarCliente(cliente);
+						petshop.atualizarCliente(cliente);
 						System.out.println("---- Cliente atualizado com sucesso ----");
 						
 					// Caso nï¿½o estejam, estes erros poderao ser lancados
@@ -319,33 +327,44 @@ public class main {
 						System.out.println(e.getMessage());
 					} catch (NumeroCartaoInvalidoException e) {
 						System.out.println(e.getMessage());
-					} catch (ClienteJaCadastradoException e) {
+					} catch (ClienteNaoEncontradoException e) {
 						System.out.println(e.getMessage());
-					} catch (LimiteAtingidoException e) {
+					}  catch (NomeCurtoException e) {
 						System.out.println(e.getMessage());
-					}
+					} 
 					
 
 					//--------------------------------------- ANIMAL ----------------------------------------
 				} else if (escolha == 1) {
+					System.out.println("Não é permitido alterar Nome e CPF!");
 					System.out.println("Digite o nome:");
 					nome = in.nextLine();
-					System.out.println("Digite a raca:");
-					raca = in.nextLine();
-					System.out.println("Digite a especie:");
+					System.out.println("Digite a especie(cachorro, gato ou ave):");
 					especie = in.nextLine();
-					System.out.println("Digite o CPF do dono");
-					dono = in.nextLine();
+					System.out.println("Digite a raca(caso seja vira-lata, digite SRD):");
+					raca = in.nextLine();
+					System.out.println("Digite o CPF do dono:");
+					cpf = in.nextLine();
+
 
 					// Tenta atualizar conferindo se todos os parametros estao certos
 					try {
-						animal = new Animal(nome, raca, especie, dono);
-						petshop.cadastrarAnimal(animal);
+						dono = petshop.procurarCliente(cpf);
+						animal = new Animal(nome, especie, raca, dono);
+						petshop.atualizarAnimal(animal);
 						System.out.println("---- Animal atualizado com sucesso ----");
 						
-					// Caso nï¿½o estejam, estes erros poderï¿½o ser lancados
-					} catch (LimiteAtingidoException e) {
+					// caso não consisga, esses erros poderam ser lancados.
+					} catch (AnimalNaoEncontradoException e) {
 						System.out.println(e.getMessage());
+					} catch (EspecieInvalidaException e) {
+					System.out.println(e.getMessage());
+					} catch (ClienteNaoEncontradoException e) {
+					System.out.println(e.getMessage());
+					} catch (NomeCurtoException e) {
+					System.out.println(e.getMessage());
+					}  catch (RacaInvalidaException e) {
+					System.out.println(e.getMessage());
 					}
 					
 					//----------------------------------------PRODUTO --------------------------------------_____
@@ -435,7 +454,7 @@ public class main {
 					
 					//----------------------------------- ANIMAL -------------------------------------
 				} else if (escolha == 1) {
-					System.out.println("Digite o ID do animal que voce deseja procurar:");
+					System.out.println("Digite o ID (nomeAnimal#CPF) do animal que voce deseja procurar:");
 					idAnimal = in.nextLine();
 					
 					// Procura se existe e informa todos as variaveis de animal
@@ -444,6 +463,8 @@ public class main {
 						System.out.println("Especie: " + petshop.procurarAnimal(idAnimal).getEspecie());
 						System.out.println("Raca: " + petshop.procurarAnimal(idAnimal).getRaca());
 						System.out.println("Dono: " + petshop.procurarAnimal(idAnimal).getDono().getNome());
+						System.out.println("ID: " + petshop.procurarAnimal(idAnimal).getIdAnimal());
+						
 						
 					// Caso nao exista, manda este erro
 					} catch (AnimalNaoEncontradoException e){

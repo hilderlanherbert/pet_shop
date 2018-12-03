@@ -12,7 +12,7 @@ public class Animal {
 	private String raca;
 	private String idAnimal;
 
-	public Animal (String nome, String especie, String raca, String dono)
+	public Animal (String nome, String especie, String raca, Cliente dono)
 			throws NomeCurtoException, EspecieInvalidaException, RacaInvalidaException, IdadeInvalidaException {
 
 		// Checa se o nome tem mais que um caracterer 
@@ -41,6 +41,10 @@ public class Animal {
 			e = new RacaInvalidaException();
 			throw e;
 		}
+		
+		
+			this.dono = dono;
+		
 
 	}
 	

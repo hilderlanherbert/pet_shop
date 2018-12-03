@@ -84,7 +84,7 @@ public class PetShop {
 	}
 
 	public void atualizarAnimal(Animal animais)
-			throws AnimalNaoEncontradoException, AnimalJaCadastradoException, NomeCurtoException, EspecieInvalidaException, RacaInvalidaException {
+			throws AnimalNaoEncontradoException, NomeCurtoException, EspecieInvalidaException, RacaInvalidaException, ClienteNaoEncontradoException {
 		animal.atualizar(animais);
 	}
 

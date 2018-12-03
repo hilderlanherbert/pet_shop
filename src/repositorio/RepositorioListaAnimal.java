@@ -1,7 +1,9 @@
 package repositorio;
 
 import classesBasicas.Animal;
+import classesBasicas.Cliente;
 import erros.AnimalNaoEncontradoException;
+import erros.ClienteNaoEncontradoException;
 import interfaces.RepositorioAnimal;
 
 public class RepositorioListaAnimal implements RepositorioAnimal{
@@ -32,12 +34,15 @@ public class RepositorioListaAnimal implements RepositorioAnimal{
 	}
 
 	public void remover(String nomeCpf) throws AnimalNaoEncontradoException {
+		Animal animalAchado;
+		animalAchado = this.procurar(nomeCpf);
+		
 		if (this.animal != null) {
-			if (this.animal.getIdAnimal().equals(nomeCpf)) {
+			if (this.animal.equals(animalAchado)) {
 				this.animal = this.proximo.animal;
 				this.proximo = this.proximo.proximo;
 			} else {
-				this.remover(nomeCpf);
+				this.proximo.remover(nomeCpf);
 			}
 		} else {
 			AnimalNaoEncontradoException e;
@@ -46,14 +51,16 @@ public class RepositorioListaAnimal implements RepositorioAnimal{
 		}
 		
 	}
+	
 
 	public Animal procurar(String nomeCpf) throws AnimalNaoEncontradoException {
-		Animal resposta = null;
-		if (this.animal != null) {
+		Animal resposta ;
+		resposta = null;
+		if (this.animal != null ) {
 			if (this.animal.getIdAnimal().equals(nomeCpf)) {
 				resposta = this.animal;
 			} else {
-				this.procurar(nomeCpf);
+				this.proximo.procurar(nomeCpf);
 			}
 		} else {
 			AnimalNaoEncontradoException e;
@@ -63,6 +70,8 @@ public class RepositorioListaAnimal implements RepositorioAnimal{
 		
 		return resposta;
 	}
+	
+
 	public boolean existe(String nomeCpf) {
 		if (this.animal != null) {
 			if (this.animal.getIdAnimal().equals(nomeCpf)) {
