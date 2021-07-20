@@ -1,2 +1,2 @@
 # pet_shop
-Project IF669 - INTRODUÇÃO A PROGRAMAÇÃO
+Project IF669 - INTRODUÇÃO A PROGRAMAÇÃO  - UFPE
